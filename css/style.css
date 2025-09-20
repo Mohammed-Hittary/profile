@@ -289,11 +289,32 @@ body.dark-mode .contact-container {
 
 /*______________________________________________________________________________________________________________________________________________*/
 
+
+/* تصميم متجاوب */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 20px;
+    }
+}
+/*______________________________________________________________________________________________________________________*/
+
 /* تنسيق زر القائمة (هامبرغر) */
 .hamburger {
     display: none;
     flex-direction: column;
     cursor: pointer;
+    padding: 5px;
+    z-index: 1001;
 }
 
 .hamburger span {
@@ -302,6 +323,39 @@ body.dark-mode .contact-container {
     background: white;
     margin: 3px 0;
     transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+/* تحويل الهامبرجر إلى X عند النشاط */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* تنسيق overlay لتغطية الصفحة */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* تصميم متجاوب */
@@ -324,6 +378,9 @@ body.dark-mode .contact-container {
         transform: translateX(100%);
         transition: transform 0.5s ease-in;
         z-index: 100;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        margin: 0;
+        padding: 0;
     }
 
     .nav-links.active {
@@ -332,32 +389,48 @@ body.dark-mode .contact-container {
 
     .nav-links li {
         margin: 20px 0;
-    }
-}
-
-@media (max-width: 480px) {
-    .logo {
-        font-size: 20px;
-    }
-}
-
-
-
-/*_________________________________________________________________________________________________________________________________*/
-/* تصميم متجاوب */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
+        opacity: 0;
+        animation: fadeIn 0.5s ease forwards;
+        animation-delay: 0.3s;
+        list-style: none;
+        width: 100%;
+        text-align: center;
     }
     
-    .footer-content {
-        grid-template-columns: 1fr;
+    .nav-links li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: 500;
+        display: block;
+        padding: 10px;
+        transition: all 0.3s ease;
     }
+    
+    .nav-links li a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+    }
+    
+    .nav-links li:nth-child(2) { animation-delay: 0.4s; }
+    .nav-links li:nth-child(3) { animation-delay: 0.5s; }
+    .nav-links li:nth-child(4) { animation-delay: 0.6s; }
+    .nav-links li:nth-child(5) { animation-delay: 0.7s; }
+    .nav-links li:nth-child(6) { animation-delay: 0.8s; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 @media (max-width: 480px) {
     .logo {
         font-size: 20px;
+    }
+    
+    .nav-links {
+        width: 80%;
     }
 }
 
